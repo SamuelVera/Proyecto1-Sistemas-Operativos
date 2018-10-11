@@ -39,8 +39,7 @@ public class RandomAccess {
     }
     
         //Extraer toda la información del registro
-    public static int[] loadData() throws IOException{
-        int[] data = new int[4];
+    public static int[] loadData(int[] data) throws IOException{
         
         for(int i=0;i<data.length;i++){
             data[i] = 0;
@@ -52,7 +51,6 @@ public class RandomAccess {
             //Leer string del .txt y transformar a un char array
         for(int i=0;i<flujo.length();i++){
             s = flujo.readByte();
-                System.out.println(s);
             if(s >= 47 && s < 58){
                 aux.addLast(s);
             }
@@ -72,7 +70,6 @@ public class RandomAccess {
                     }
                     auxmult *= 10;
                 }
-                System.out.println(auxmult);
                 data[aux2] += Character.getNumericValue((Integer)aux3[i])*auxmult;
                 auxmult = 0.1; //Reiniciar posicionador
             }else if(((Integer)aux3[i]) == 47){
