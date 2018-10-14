@@ -12,7 +12,7 @@ public class Inicio extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         m = new Main();
-        m.execute();
+        m.initiate();
     }
 
     public Main m;
@@ -152,7 +152,7 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_closeActionPerformed
 
     private void agregarPBatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPBatActionPerformed
-        if(m.pBat+1 > m.productoresMaxBat[0]){
+        if(m.pBat+1 > m.data[4]){
             System.out.println("Máximo de productores de bateria alcanzado"); //Cambiar por un JOptionPane
         }else{
             m.pBat++;
@@ -170,7 +170,7 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_eliminarPBatActionPerformed
 
     private void agregarPPanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPPanActionPerformed
-        if(m.pPan+1 > m.productoresMaxPan[0]){
+        if(m.pPan+1 > m.data[5]){
             System.out.println("Máximo de productores de pantallas alcanzado"); //Cambiar por un JOptionPane
         }else{
             m.pPan++;
@@ -188,7 +188,7 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_eliminarPPanActionPerformed
 
     private void agregarPCabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPCabActionPerformed
-        if(m.pCab+1 > m.productoresMaxCab[0]){
+        if(m.pCab+1 > m.data[6]){
             System.out.println("Máximo de productores de cables alcanzado"); //Cambiar por un JOptionPane
         }else{
             m.pCab++;
@@ -206,7 +206,7 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_eliminarPCabActionPerformed
 
     private void agregarEnsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarEnsActionPerformed
-        if(m.en+1 > m.maxEnsambla[0]){
+        if(m.en+1 > m.data[11]){
             System.out.println("Máximo de ensambladores alcanzado"); //Cambiar por un JOptionPane
         }else{
             m.en++;
