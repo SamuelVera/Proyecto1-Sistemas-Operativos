@@ -31,7 +31,7 @@ public class Inicio extends javax.swing.JFrame {
         cab = new javax.swing.JLabel();
         geren = new javax.swing.JLabel();
         crono = new javax.swing.JLabel();
-        j = new javax.swing.JLabel();
+        diasD = new javax.swing.JLabel();
         eliminarPBat = new javax.swing.JButton();
         agregarPBat = new javax.swing.JButton();
         agregarPPan = new javax.swing.JButton();
@@ -40,6 +40,7 @@ public class Inicio extends javax.swing.JFrame {
         eliminarPCab = new javax.swing.JButton();
         agregarEns = new javax.swing.JButton();
         eliminarEns = new javax.swing.JButton();
+        tel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -66,14 +67,14 @@ public class Inicio extends javax.swing.JFrame {
         cab.setText("Cables:");
         getContentPane().add(cab, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 290, -1));
 
-        geren.setText("El gerente esta");
-        getContentPane().add(geren, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 290, -1));
+        geren.setText("El gerente está");
+        getContentPane().add(geren, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 290, -1));
 
-        crono.setText("El cronometrador está haciendo es NADA");
-        getContentPane().add(crono, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 290, -1));
+        crono.setText("El cronometrador está");
+        getContentPane().add(crono, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 290, -1));
 
-        j.setText("jLabel1");
-        getContentPane().add(j, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 290, -1));
+        diasD.setText("jLabel1");
+        getContentPane().add(diasD, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 290, -1));
 
         eliminarPBat.setText("-");
         eliminarPBat.addActionListener(new java.awt.event.ActionListener() {
@@ -139,6 +140,9 @@ public class Inicio extends javax.swing.JFrame {
         });
         getContentPane().add(eliminarEns, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 40, -1));
 
+        tel.setText("Teléfonos");
+        getContentPane().add(tel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 290, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -155,6 +159,7 @@ public class Inicio extends javax.swing.JFrame {
         if(m.pBat+1 > m.data[4]){
             System.out.println("Máximo de productores de bateria alcanzado"); //Cambiar por un JOptionPane
         }else{
+            m.newT(0);
             m.pBat++;
             Inicio.prodBat.setText("Productores de baterías: "+m.pBat);
         }
@@ -166,6 +171,7 @@ public class Inicio extends javax.swing.JFrame {
         }else{
             m.pBat--;
             Inicio.prodBat.setText("Productores de baterías: "+m.pBat);
+            m.closeT(0);
         }
     }//GEN-LAST:event_eliminarPBatActionPerformed
 
@@ -173,6 +179,7 @@ public class Inicio extends javax.swing.JFrame {
         if(m.pPan+1 > m.data[5]){
             System.out.println("Máximo de productores de pantallas alcanzado"); //Cambiar por un JOptionPane
         }else{
+            m.newT(1);
             m.pPan++;
             Inicio.prodPan.setText("Productores de pantallas: "+m.pPan);
         }
@@ -184,6 +191,7 @@ public class Inicio extends javax.swing.JFrame {
         }else{
             m.pPan--;
             Inicio.prodPan.setText("Productores de pantallas: "+m.pPan);
+            m.closeT(1);
         }
     }//GEN-LAST:event_eliminarPPanActionPerformed
 
@@ -191,6 +199,7 @@ public class Inicio extends javax.swing.JFrame {
         if(m.pCab+1 > m.data[6]){
             System.out.println("Máximo de productores de cables alcanzado"); //Cambiar por un JOptionPane
         }else{
+            m.newT(2);
             m.pCab++;
             Inicio.prodCab.setText("Productores de cables: "+m.pCab);
         }
@@ -202,6 +211,7 @@ public class Inicio extends javax.swing.JFrame {
         }else{
             m.pCab--;
             Inicio.prodCab.setText("Productores de cables: "+m.pCab);
+            m.closeT(2);
         }
     }//GEN-LAST:event_eliminarPCabActionPerformed
 
@@ -209,6 +219,7 @@ public class Inicio extends javax.swing.JFrame {
         if(m.en+1 > m.data[11]){
             System.out.println("Máximo de ensambladores alcanzado"); //Cambiar por un JOptionPane
         }else{
+            m.newT(3);
             m.en++;
             Inicio.ensNum.setText("Ensambladores: "+m.en);
         }
@@ -218,6 +229,7 @@ public class Inicio extends javax.swing.JFrame {
         if(m.en-1 < 0){
             System.out.println("Error: número negativo de ensambladores"); //Cambiar por un JOptionPane
         }else{
+            m.closeT(3);
             m.en--;
             Inicio.ensNum.setText("Ensambladores: "+m.en);
         }
@@ -268,16 +280,17 @@ public class Inicio extends javax.swing.JFrame {
     public static javax.swing.JLabel cab;
     private javax.swing.JButton close;
     public static javax.swing.JLabel crono;
+    public static javax.swing.JLabel diasD;
     private javax.swing.JButton eliminarEns;
     private javax.swing.JButton eliminarPBat;
     private javax.swing.JButton eliminarPCab;
     private javax.swing.JButton eliminarPPan;
     public static javax.swing.JLabel ensNum;
     public static javax.swing.JLabel geren;
-    public static javax.swing.JLabel j;
     public static javax.swing.JLabel pan;
     public static javax.swing.JLabel prodBat;
     public static javax.swing.JLabel prodCab;
     public static javax.swing.JLabel prodPan;
+    public static javax.swing.JLabel tel;
     // End of variables declaration//GEN-END:variables
 }
