@@ -9,6 +9,9 @@ public class Almacen {
     public Almacen(int tam){
         this.tam = tam;
         vec = new boolean[tam];
+        for(int i=0;i<this.tam;i++){
+            vec[i] = false;
+        }
     }
     
         //Obtener tamaño del búffer
@@ -30,7 +33,7 @@ public class Almacen {
     public int getLlenos(){
         int ret=0;
         for(int i=0;i<vec.length;i++){
-            if(vec[i] == true){
+            if(getDat(i)){
                 ret++;
             }
         }
