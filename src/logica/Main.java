@@ -16,8 +16,6 @@ public class Main {
     public int pCab;//Cantidad de productores de cables
     public int en;//Cantidad de ensambladores
     
-        //
-    
     
         //Almacenes
     public static Almacen aBat;//Almacen de Baterias
@@ -221,8 +219,12 @@ public class Main {
             p.start();
             this.lEn.addFirst(p);
         }
+            //Contador de días
+        int[] contador = new int[]{this.data[12]};
+        Semaphore semaEL = new Semaphore(1);
             //Cronometrador
         
             //Gerente
+        
     }
 }
