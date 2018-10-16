@@ -3,138 +3,226 @@ package logica;
 import interfaz.Inicio;
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.concurrent.Semaphore;
 
 public class Main {
     
-    private final int[] tiempo = new int[1]; //Tiempo que dura el día
-    public final int[] productoresIniBat = new int[1]; //Cantidad inicial de productores de baterías
-    public final int[] productoresIniPan = new int[1]; //Cantidad inicial de productores de pantallas
-    public final int[] productoresIniCab = new int[1]; //Cantidad inicial de productores de cables
-    public final int[] productoresMaxBat = new int[1]; //Cantidad máxima de productores de baterías
-    public final int[] productoresMaxPan = new int[1]; //Cantidad máxima de productores de pantallas
-    public final int[] productoresMaxCab = new int[1]; //Cantidad máxima de productores de cables
-    public final int[] maxBat = new int[1]; //Cantidad máxima de baterías en el almacen
-    public final int[] maxPan = new int[1]; //Cantidad máxima de pantallas en el almacen
-    public final int[] maxCab = new int[1]; //Cantidad máxima de cables en el almacen
-    public final int[] iniEnsambla = new int[1]; //Cantidad inicial de ensambladores
-    public final int[] maxEnsambla = new int[1]; //Cantidad máxima de ensambladores 
-    public final int[] diasDes = new int [1]; //Días entre despachos
+        //Arreglo con los datos
+    public int[] data;
     
-    public int pBat; //Cantidad de productores de baterías
-    public int pPan; //Cantidad de productores de pantallas
-    public int pCab; //Cantidad de productores de cables
-    public int en; //Cantidad de ensambladores
+    public int pBat;//Cantidad de productores de baterías
+    public int pPan;//Cantidad de productores de pantallas
+    public int pCab;//Cantidad de productores de cables
+    public int en;//Cantidad de ensambladores
+    
+        //
+    
+    
+        //Almacenes
+    public static Almacen aBat;//Almacen de Baterias
+    public static Almacen aPan;//Almacen de Pantallas
+    public static Almacen aCab;//Almacen de Cables
+    public static int tel;//Teléfonos producidos
+    
+        //Semáforos
+    private Semaphore semaProdB;//Semáforo de productores de Baterías
+    private Semaphore semaConsB;//Semáforo de consumidor de Baterías
+    private Semaphore semaExB;//Semáforo de exclusividad almacen de Baterías
+    private Semaphore semaProdP;//Semáforo de productores de Pantallas
+    private Semaphore semaConsP;//Semáforo de consumidor de Pantallas
+    private Semaphore semaExP;//Semáforo de exclusividad del almacen de Pantallas
+    private Semaphore semaProdC;//Semáforo de productores de Cables
+    private Semaphore semaConsC;//Semáforo de consumidor de Cables
+    private Semaphore semaExC;//Semáforo de exclusividad del almacen de Cables
+    private Semaphore semaImp;//Semáforo de exclusividad al imprimir
+    
+        //Apuntadores
+    public static int apuntPB;//Apuntar al almacen de Baterías para producir
+    public static int apuntPP;//Apuntar al almacen de Pantallas para producir
+    public static int apuntPC;//Apuntar al almacen de Cables para producir
+    public static int apuntCB;//Apuntar al almacen de Baterías para consumir
+    public static int apuntCP;//Apuntar al almacen de Pantallas para consumir
+    public static int apuntCC;//Apuntar al almacen de Cables para consumir
+    
+        //Lista para seguir pista de los procesor
+    private LinkedList lBat = new LinkedList();
+    private LinkedList lPan = new LinkedList();
+    private LinkedList lCab = new LinkedList();
+    private LinkedList lEn = new LinkedList();
+    
+        //Cerrar hilo
+    public void closeT(int tipo){
+        Productor p;
+        if(tipo == 0){
+            p = (Productor)this.lBat.removeFirst();
+            p.setRun(false);
+        }else if(tipo == 1){
+            p = (Productor)this.lPan.removeFirst();
+            p.setRun(false);
+        }else if(tipo == 2){
+            p = (Productor)this.lCab.removeFirst();
+            p.setRun(false);
+        }else if(tipo == 3){
+            p = (Productor)this.lEn.removeFirst();
+            p.setRun(false);
+        }
+    }
+    
+        //Nuevo hilo
+    public void newT(int tipo){
+        Productor p = null;
+        if(tipo == 0){
+            p = new Productor(this.semaProdB,this.semaConsB,this.semaExB,true,this.semaImp,this.data[0],0,true);
+        }else if(tipo == 1){
+            p = new Productor(this.semaProdP,this.semaConsP,this.semaExP,true,this.semaImp,(this.data[0]*2),1,true);
+        }else if(tipo == 2){
+            p = new Productor(this.semaProdC,this.semaConsC,this.semaExC,true,this.semaImp,this.data[0],2,true);
+        }else if(tipo == 3){
+            p = new Productor(this.semaProdB,this.semaConsB,this.semaExB,
+            this.semaProdP,this.semaConsP,this.semaExP,
+            this.semaProdC,this.semaConsC,this.semaExC,
+            false,this.semaImp,(this.data[0]*2),3,true);
+        }
+        p.start();
+    }
     
     public void terminate() throws IOException{
-        int[] data = new int[13];
-        
-        data[0] = this.tiempo[0]/1000;
-        data[1] = this.productoresIniBat[0];
-        data[2] = this.productoresIniPan[0];
-        data[3] = this.productoresIniCab[0];
-        data[4] = this.productoresMaxBat[0];
-        data[5] = this.productoresMaxPan[0];
-        data[6] = this.productoresMaxCab[0];
-        data[7] = this.maxBat[0];
-        data[8] = this.maxPan[0];
-        data[9] = this.maxCab[0];
-        data[10] = this.iniEnsambla[0];
-        data[11] = this.maxEnsambla[0];
-        data[12] = this.diasDes[0];
-        
-        RandomAccess.saveData(data);
+        this.data[0] = this.data[0]/1000;
+        RandomAccess.saveData(this.data);
         RandomAccess.closeF();
     }
     
-    public void execute() throws IOException{
-        
-        int[] data = new int[13];
+    public void initiate() throws IOException{
         
         File f = new File("data.txt");
+        this.data = new int[13];
         
         if(!f.exists()){//Datos a inicializarse en la primera ejecución
             RandomAccess.createF(f);
             
-            data[0] = 100000; //100 segundos (en ms).
-            data[1] = 2; //Productores de baterias iniciales
-            data[2] = 3; //Productores de patalla iniciales
-            data[3] = 1; //Productores de cables iniciales
-            data[4] = 4; //Máximo de productores de baterías
-            data[5] = 8; //Máximo de productores de pantallas
-            data[6] = 3; //Máximo de productores de cables
-            data[7] = 25; //Tamaño del almacen de baterías
-            data[8] = 30; //Tamaño del almacen de pantallas
-            data[9] = 35; //Tamaño del almacen de cables
-            data[10] = 2; //Cantidad inicial de ensambladores
-            data[11] = 5; //Cantidad máxima de ensambladores 
-            data[12] = 15; //Días entre despachos
+            this.data[0] = 100000; //100 segundos (en ms).
+            this.data[1] = 2; //Productores de baterias iniciales
+            this.data[2] = 3; //Productores de patalla iniciales
+            this.data[3] = 1; //Productores de cables iniciales
+            this.data[4] = 4; //Máximo de productores de baterías
+            this.data[5] = 8; //Máximo de productores de pantallas
+            this.data[6] = 3; //Máximo de productores de cables
+            this.data[7] = 25; //Tamaño del almacen de baterías
+            this.data[8] = 30; //Tamaño del almacen de pantallas
+            this.data[9] = 35; //Tamaño del almacen de cables
+            this.data[10] = 2; //Cantidad inicial de ensambladores
+            this.data[11] = 5; //Cantidad máxima de ensambladores 
+            this.data[12] = 15; //Días entre despachos
             
         }else{
             RandomAccess.createF(f);
-            data = RandomAccess.loadData(data);
+            this.data = RandomAccess.loadData(this.data);
             
                 //Validaciones de datos
-            if(data[0] <= 0){ data[0] = 100000; //Tiempo
-            }else{ data[0] = data[0]*1000; } //Pasar de seg a miliseg
-            if(data[1] <= 0){ data[1] = 2; } //Productores de baterias iniciales
-            if(data[2] <= 0){ data[2] = 3; } //Productores de patalla iniciales
-            if(data[3] <= 0){ data[3] = 1; } //Productores de cables iniciales
-            if(data[4] <= 0){ //Máximo de productores de baterías
-                data[4] = 4;
-                if(data[4] <= data[1]){data[4] = data[1]+2;}
+            if(this.data[0] <= 0){ this.data[0] = 100000; //Tiempo
+            }else{ this.data[0] = this.data[0]*1000; } //Pasar de seg a miliseg
+            if(this.data[1] <= 0){ this.data[1] = 2; } //Productores de baterias iniciales
+            if(this.data[2] <= 0){ this.data[2] = 3; } //Productores de patalla iniciales
+            if(this.data[3] <= 0){ this.data[3] = 1; } //Productores de cables iniciales
+            if(this.data[4] <= 0){ //Máximo de productores de baterías
+                this.data[4] = 4;
+                if(this.data[4] <= this.data[1]){this.data[4] = this.data[1]+2;}
             }
-            if(data[5] <= 0){ //Máximo de productores de pantallas
-                data[5] = 8;
-                if(data[5] <= data[2]){ data[5] = data[2]+2; }
+            if(this.data[5] <= 0){ //Máximo de productores de pantallas
+                this.data[5] = 8;
+                if(this.data[5] <= this.data[2]){ this.data[5] = this.data[2]+2; }
             }
-            if(data[6] <= 0){ //Máximo de productores de cables
-                data[6] = 3;
-                if(data[6] <= data[3]){ data[6] = data[3]+2; }
+            if(this.data[6] <= 0){ //Máximo de productores de cables
+                this.data[6] = 3;
+                if(this.data[6] <= this.data[3]){ this.data[6] = this.data[3]+2; }
             }
-            if(data[7] <= 1){ //Tamaño del almacen de baterías
-                data[7] = 25;
+            if(this.data[7] <= 1){ //Tamaño del almacen de baterías
+                this.data[7] = 25;
             }
-            if(data[8] <= 1){ //Tamaño del almacen de pantallas
-                data[8] = 30;
+            if(this.data[8] <= 1){ //Tamaño del almacen de pantallas
+                this.data[8] = 30;
             }
-            if(data[9] <= 2){ //Tamaño del almacen de cables
-                data[9] = 35;
+            if(this.data[9] <= 2){ //Tamaño del almacen de cables
+                this.data[9] = 35;
             }
-            if(data[10] <= 0){ //Cantidad inicial de ensambladores
-                data[10] = 2;
+            if(this.data[10] <= 0){ //Cantidad inicial de ensambladores
+                this.data[10] = 2;
             }
-            if(data[11] <= 0){ //Cantidad máxima de ensambladores 
-                data[11] = 5;
-                if(data[11] <= data[10]){ data[11] = data[10]+2; }
+            if(this.data[11] <= 0){ //Cantidad máxima de ensambladores 
+                this.data[11] = 5;
+                if(this.data[11] <= this.data[10]){ this.data[11] = this.data[10]+2; }
             }
-            if(data[12] <= 0){ //Cantidad de días entre despachos
-                data[12] = 15;
+            if(this.data[12] <= 0){ //Cantidad de días entre despachos
+                this.data[12] = 15;
             }
         }
         
-        this.tiempo[0] = data[0]; //100 segundos (en ms).
-        this.productoresIniBat[0] = data[1]; //Productores de baterias iniciales
-        this.pBat = data[1];
-        Inicio.prodBat.setText("Productores de baterías: "+data[1]);
-        this.productoresIniPan[0] = data[2]; //Productores de patalla iniciales
-        this.pPan = data[2];
-        Inicio.prodPan.setText("Productores de pantallas: "+data[2]);
-        this.productoresIniCab[0] = data[3]; //Prodcutores de cables iniciales
-        this.pCab = data[3];
+        Inicio.prodBat.setText("Productores de baterías: "+this.data[1]);
+        this.pBat = this.data[1];
+        Inicio.prodPan.setText("Productores de pantallas: "+this.data[2]);
+        this.pPan = this.data[2];
         Inicio.prodCab.setText("Productores de cables: "+data[3]);
-        this.productoresMaxBat[0] = data[4]; //Máximo de productores de baterías
-        this.productoresMaxPan[0] = data[5]; //Máximo de productores de pantallas
-        this.productoresMaxCab[0] = data[6]; //Máximo de productores de cables
-        this.maxBat[0] = data[7]; //Tamaño del almacen de baterías
-        this.maxPan[0] = data[8]; //Tamaño del almacen de pantallas
-        this.maxCab[0] = data[9]; //Tamaño del almacen de cables
-        this.iniEnsambla[0] = data[10]; //Cantidad inicial de ensambladores
-        this.en = data[10];
-        Inicio.ensNum.setText("Ensambladores: "+data[10]);
-        this.maxEnsambla[0] = data[11]; //Cantidad máxima de ensambladores 
-        this.diasDes[0] = data[12]; //Días entre despachos
-        Inicio.j.setText("Días entre despachos: "+data[12]);
-            //Crear hilos
+        this.pCab = this.data[3];
+        Inicio.ensNum.setText("Ensambladores: "+this.data[10]);
+        this.en = this.data[10];
+        Inicio.diasD.setText("Días entre despachos: "+this.data[12]);
         
+            //Crear almacenes
+        Main.aBat = new Almacen(data[7]);
+        Main.aPan = new Almacen(data[8]);
+        Main.aCab = new Almacen(data[9]);
+        
+            //Crear semáforos
+        this.semaProdB = new Semaphore(this.data[7]);
+        this.semaConsB = new Semaphore(0);
+        this.semaExB = new Semaphore(1);
+        this.semaProdP = new Semaphore(this.data[8]);
+        this.semaConsP = new Semaphore(0);
+        this.semaExP = new Semaphore(1);
+        this.semaProdC = new Semaphore(this.data[9]);
+        this.semaConsC = new Semaphore(-1);
+        this.semaExC = new Semaphore(1);
+        this.semaImp = new Semaphore(1);
+        
+            //Inicializar apuntadores
+        Main.apuntPB = 0;
+        Main.apuntCB = 0;
+        Main.apuntPP = 0;
+        Main.apuntCP = 0;
+        Main.apuntPC = 0;
+        Main.apuntCC = 0;
+        
+                //Crear Hilos
+            //Productores de Baterías
+        for(int i=0;i<this.pBat;i++){
+            Productor p = new Productor(this.semaProdB,this.semaConsB,this.semaExB,true,this.semaImp,this.data[0], 0, true);
+            p.start();
+            this.lBat.addFirst(p);
+        }
+            //Productores de pantallas
+        for(int i=0;i<this.pPan;i++){
+            Productor p = new Productor(this.semaProdP,this.semaConsP,this.semaExP,true,this.semaImp,(this.data[0]*2), 1, true);
+            p.start();
+            this.lPan.addFirst(p);
+        }
+            //Productores de Cables
+        for(int i=0;i<this.pCab;i++){
+            Productor p = new Productor(this.semaProdC,this.semaConsC,this.semaExC,true,this.semaImp,this.data[0], 2, true);
+            p.start();
+            this.lCab.addFirst(p);
+        }
+            //Ensambladores
+        for(int i=0;i<this.en;i++){
+            Productor p = new Productor(this.semaProdB,this.semaConsB,this.semaExB,
+            this.semaProdP,this.semaConsP,this.semaExP,
+            this.semaProdC,this.semaConsC,this.semaExC,
+            false, this.semaImp, (this.data[0]*2), 3, true);
+            p.start();
+            this.lEn.addFirst(p);
+        }
+            //Cronometrador
+        
+            //Gerente
     }
 }
