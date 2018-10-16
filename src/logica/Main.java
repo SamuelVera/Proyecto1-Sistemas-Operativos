@@ -11,15 +11,19 @@ public class Main {
         //Arreglo con los datos
     public int[] data;
     
-    public int pBat; //Cantidad de productores de baterías
-    public int pPan; //Cantidad de productores de pantallas
-    public int pCab; //Cantidad de productores de cables
-    public int en; //Cantidad de ensambladores
+    public int pBat;//Cantidad de productores de baterías
+    public int pPan;//Cantidad de productores de pantallas
+    public int pCab;//Cantidad de productores de cables
+    public int en;//Cantidad de ensambladores
+    
+        //
+    
     
         //Almacenes
     public static Almacen aBat;//Almacen de Baterias
     public static Almacen aPan;//Almacen de Pantallas
     public static Almacen aCab;//Almacen de Cables
+    public static int tel;//Teléfonos producidos
     
         //Semáforos
     private Semaphore semaProdB;//Semáforo de productores de Baterías
@@ -34,12 +38,54 @@ public class Main {
     private Semaphore semaImp;//Semáforo de exclusividad al imprimir
     
         //Apuntadores
-    private int apuntPB;//Apuntar al almacen de Baterías para producir
-    private int apuntPP;//Apuntar al almacen de Pantallas para producir
-    private int apuntPC;//Apuntar al almacen de Cables para producir
-    private int apuntCB;//Apuntar al almacen de Baterías para consumir
-    private int apuntCP;//Apuntar al almacen de Pantallas para consumir
-    private int apuntCC;//Apuntar al almacen de Cables para consumir
+    public static int apuntPB;//Apuntar al almacen de Baterías para producir
+    public static int apuntPP;//Apuntar al almacen de Pantallas para producir
+    public static int apuntPC;//Apuntar al almacen de Cables para producir
+    public static int apuntCB;//Apuntar al almacen de Baterías para consumir
+    public static int apuntCP;//Apuntar al almacen de Pantallas para consumir
+    public static int apuntCC;//Apuntar al almacen de Cables para consumir
+    
+        //Lista para seguir pista de los procesor
+    private LinkedList lBat = new LinkedList();
+    private LinkedList lPan = new LinkedList();
+    private LinkedList lCab = new LinkedList();
+    private LinkedList lEn = new LinkedList();
+    
+        //Cerrar hilo
+    public void closeT(int tipo){
+        Productor p;
+        if(tipo == 0){
+            p = (Productor)this.lBat.removeFirst();
+            p.setRun(false);
+        }else if(tipo == 1){
+            p = (Productor)this.lPan.removeFirst();
+            p.setRun(false);
+        }else if(tipo == 2){
+            p = (Productor)this.lCab.removeFirst();
+            p.setRun(false);
+        }else if(tipo == 3){
+            p = (Productor)this.lEn.removeFirst();
+            p.setRun(false);
+        }
+    }
+    
+        //Nuevo hilo
+    public void newT(int tipo){
+        Productor p = null;
+        if(tipo == 0){
+            p = new Productor(this.semaProdB,this.semaConsB,this.semaExB,true,this.semaImp,this.data[0],0,true);
+        }else if(tipo == 1){
+            p = new Productor(this.semaProdP,this.semaConsP,this.semaExP,true,this.semaImp,(this.data[0]*2),1,true);
+        }else if(tipo == 2){
+            p = new Productor(this.semaProdC,this.semaConsC,this.semaExC,true,this.semaImp,this.data[0],2,true);
+        }else if(tipo == 3){
+            p = new Productor(this.semaProdB,this.semaConsB,this.semaExB,
+            this.semaProdP,this.semaConsP,this.semaExP,
+            this.semaProdC,this.semaConsC,this.semaExC,
+            false,this.semaImp,(this.data[0]*2),3,true);
+        }
+        p.start();
+    }
     
     public void terminate() throws IOException{
         this.data[0] = this.data[0]/1000;
@@ -120,7 +166,7 @@ public class Main {
         this.pCab = this.data[3];
         Inicio.ensNum.setText("Ensambladores: "+this.data[10]);
         this.en = this.data[10];
-        Inicio.j.setText("Días entre despachos: "+this.data[12]);
+        Inicio.diasD.setText("Días entre despachos: "+this.data[12]);
         
             //Crear almacenes
         Main.aBat = new Almacen(data[7]);
@@ -135,35 +181,48 @@ public class Main {
         this.semaConsP = new Semaphore(0);
         this.semaExP = new Semaphore(1);
         this.semaProdC = new Semaphore(this.data[9]);
-        this.semaConsC = new Semaphore(0);
+        this.semaConsC = new Semaphore(-1);
         this.semaExC = new Semaphore(1);
         this.semaImp = new Semaphore(1);
         
             //Inicializar apuntadores
-        this.apuntPB = 0;
-        this.apuntCB = 0;
-        this.apuntPP = 0;
-        this.apuntCP = 0;
-        this.apuntPC = 0;
-        this.apuntCC = 0;
-        
+        Main.apuntPB = 0;
+        Main.apuntCB = 0;
+        Main.apuntPP = 0;
+        Main.apuntCP = 0;
+        Main.apuntPC = 0;
+        Main.apuntCC = 0;
         
                 //Crear Hilos
             //Productores de Baterías
         for(int i=0;i<this.pBat;i++){
-            Productor p =new Productor(this.semaProdB,this.semaConsB,this.semaExB,this.apuntPB,true,this.semaImp,this.data[0],0);
+            Productor p = new Productor(this.semaProdB,this.semaConsB,this.semaExB,true,this.semaImp,this.data[0], 0, true);
             p.start();
+            this.lBat.addFirst(p);
         }
             //Productores de pantallas
         for(int i=0;i<this.pPan;i++){
-            Productor p =new Productor(this.semaProdP,this.semaConsP,this.semaExP,this.apuntPP,true,this.semaImp,(this.data[0]*2),1);
+            Productor p = new Productor(this.semaProdP,this.semaConsP,this.semaExP,true,this.semaImp,(this.data[0]*2), 1, true);
             p.start();
+            this.lPan.addFirst(p);
         }
             //Productores de Cables
         for(int i=0;i<this.pCab;i++){
-            Productor p =new Productor(this.semaProdC,this.semaConsC,this.semaExC,this.apuntPC,true,this.semaImp,this.data[0],2);
+            Productor p = new Productor(this.semaProdC,this.semaConsC,this.semaExC,true,this.semaImp,this.data[0], 2, true);
             p.start();
+            this.lCab.addFirst(p);
         }
+            //Ensambladores
+        for(int i=0;i<this.en;i++){
+            Productor p = new Productor(this.semaProdB,this.semaConsB,this.semaExB,
+            this.semaProdP,this.semaConsP,this.semaExP,
+            this.semaProdC,this.semaConsC,this.semaExC,
+            false, this.semaImp, (this.data[0]*2), 3, true);
+            p.start();
+            this.lEn.addFirst(p);
+        }
+            //Cronometrador
         
+            //Gerente
     }
 }
