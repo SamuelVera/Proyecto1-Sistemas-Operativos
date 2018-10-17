@@ -41,6 +41,8 @@ public class Inicio extends javax.swing.JFrame {
         agregarEns = new javax.swing.JButton();
         eliminarEns = new javax.swing.JButton();
         tel = new javax.swing.JLabel();
+        despacho = new javax.swing.JLabel();
+        enProd = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -52,29 +54,37 @@ public class Inicio extends javax.swing.JFrame {
                 closeActionPerformed(evt);
             }
         });
-        getContentPane().add(close, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 230, -1, -1));
-        getContentPane().add(prodBat, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 280, 10));
-        getContentPane().add(prodPan, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 290, 10));
-        getContentPane().add(prodCab, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 290, 10));
-        getContentPane().add(ensNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 290, 10));
+        getContentPane().add(close, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, -1, -1));
+
+        prodBat.setText("Productores de baterías:");
+        getContentPane().add(prodBat, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 180, 20));
+
+        prodPan.setText("Productores de pantallas:");
+        getContentPane().add(prodPan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 180, 20));
+
+        prodCab.setText("Productores de cables");
+        getContentPane().add(prodCab, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 180, 20));
+
+        ensNum.setText("Ensambladores");
+        getContentPane().add(ensNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 180, 20));
 
         bat.setText("Baterías: ");
-        getContentPane().add(bat, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 290, -1));
+        getContentPane().add(bat, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 220, -1));
 
         pan.setText("Pantallas:");
-        getContentPane().add(pan, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 290, -1));
+        getContentPane().add(pan, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 30, 220, -1));
 
         cab.setText("Cables:");
-        getContentPane().add(cab, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 290, -1));
+        getContentPane().add(cab, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, 220, -1));
 
-        geren.setText("El gerente está");
-        getContentPane().add(geren, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 290, -1));
+        geren.setText("El gerente está dormido");
+        getContentPane().add(geren, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 240, -1));
 
-        crono.setText("El cronometrador está");
-        getContentPane().add(crono, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 290, -1));
+        crono.setText("El cronometrador está dormido");
+        getContentPane().add(crono, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 240, -1));
 
-        diasD.setText("jLabel1");
-        getContentPane().add(diasD, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 290, -1));
+        diasD.setText("Días para el despacho:");
+        getContentPane().add(diasD, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, 240, -1));
 
         eliminarPBat.setText("-");
         eliminarPBat.addActionListener(new java.awt.event.ActionListener() {
@@ -82,7 +92,7 @@ public class Inicio extends javax.swing.JFrame {
                 eliminarPBatActionPerformed(evt);
             }
         });
-        getContentPane().add(eliminarPBat, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 40, -1));
+        getContentPane().add(eliminarPBat, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 40, -1));
 
         agregarPBat.setText("+");
         agregarPBat.addActionListener(new java.awt.event.ActionListener() {
@@ -90,7 +100,7 @@ public class Inicio extends javax.swing.JFrame {
                 agregarPBatActionPerformed(evt);
             }
         });
-        getContentPane().add(agregarPBat, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 40, -1));
+        getContentPane().add(agregarPBat, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 40, -1));
 
         agregarPPan.setText("+");
         agregarPPan.addActionListener(new java.awt.event.ActionListener() {
@@ -98,7 +108,7 @@ public class Inicio extends javax.swing.JFrame {
                 agregarPPanActionPerformed(evt);
             }
         });
-        getContentPane().add(agregarPPan, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 40, -1));
+        getContentPane().add(agregarPPan, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, 40, -1));
 
         eliminarPPan.setText("-");
         eliminarPPan.addActionListener(new java.awt.event.ActionListener() {
@@ -106,7 +116,7 @@ public class Inicio extends javax.swing.JFrame {
                 eliminarPPanActionPerformed(evt);
             }
         });
-        getContentPane().add(eliminarPPan, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 40, -1));
+        getContentPane().add(eliminarPPan, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 40, -1));
 
         agregarPCab.setText("+");
         agregarPCab.addActionListener(new java.awt.event.ActionListener() {
@@ -114,7 +124,7 @@ public class Inicio extends javax.swing.JFrame {
                 agregarPCabActionPerformed(evt);
             }
         });
-        getContentPane().add(agregarPCab, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 40, -1));
+        getContentPane().add(agregarPCab, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 40, -1));
 
         eliminarPCab.setText("-");
         eliminarPCab.addActionListener(new java.awt.event.ActionListener() {
@@ -122,7 +132,7 @@ public class Inicio extends javax.swing.JFrame {
                 eliminarPCabActionPerformed(evt);
             }
         });
-        getContentPane().add(eliminarPCab, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, -1, -1));
+        getContentPane().add(eliminarPCab, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 40, -1));
 
         agregarEns.setText("+");
         agregarEns.addActionListener(new java.awt.event.ActionListener() {
@@ -130,7 +140,7 @@ public class Inicio extends javax.swing.JFrame {
                 agregarEnsActionPerformed(evt);
             }
         });
-        getContentPane().add(agregarEns, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 40, -1));
+        getContentPane().add(agregarEns, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 40, -1));
 
         eliminarEns.setText("-");
         eliminarEns.addActionListener(new java.awt.event.ActionListener() {
@@ -138,10 +148,16 @@ public class Inicio extends javax.swing.JFrame {
                 eliminarEnsActionPerformed(evt);
             }
         });
-        getContentPane().add(eliminarEns, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 40, -1));
+        getContentPane().add(eliminarEns, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 40, -1));
 
-        tel.setText("Teléfonos");
-        getContentPane().add(tel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 290, -1));
+        tel.setText("Teléfonos:");
+        getContentPane().add(tel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 220, -1));
+
+        despacho.setText("Último despacho: ");
+        getContentPane().add(despacho, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 150, 240, -1));
+
+        enProd.setText("Teléfonos en producción:");
+        getContentPane().add(enProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 190, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -280,11 +296,13 @@ public class Inicio extends javax.swing.JFrame {
     public static javax.swing.JLabel cab;
     private javax.swing.JButton close;
     public static javax.swing.JLabel crono;
+    public static javax.swing.JLabel despacho;
     public static javax.swing.JLabel diasD;
     private javax.swing.JButton eliminarEns;
     private javax.swing.JButton eliminarPBat;
     private javax.swing.JButton eliminarPCab;
     private javax.swing.JButton eliminarPPan;
+    public static javax.swing.JLabel enProd;
     public static javax.swing.JLabel ensNum;
     public static javax.swing.JLabel geren;
     public static javax.swing.JLabel pan;

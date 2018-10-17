@@ -16,6 +16,7 @@ public class Productor extends Thread{
     private boolean run; //Se ejecuta o no
     int sleep; //Tiempo de espera
     int prod; //Tipo de prodctor (0-Bat/1-Pan/2-Cab/3-Ensamblador)
+    int enProd = 0;
     
         //Constructor de los productores
     Productor(Semaphore sP, Semaphore sC, Semaphore sE, boolean val, Semaphore sI, int sleep, int prod, boolean run){
@@ -39,15 +40,17 @@ public class Productor extends Thread{
     private Semaphore sPC; //Semáforo de productor de cables
     private Semaphore sCC; //Semáforo de consumidor de cables
     private Semaphore sEC; //Semáforo de exclusividad de cables
+    private Semaphore sEF; //Semáforo de exclusividad de las unidades despachables
     
         //Constructor del consumidor
     Productor(Semaphore sPB, Semaphore sCB, Semaphore sEB, //Semaforos respectivos de baterías 
             Semaphore sPP, Semaphore sCP, Semaphore sEP, //Semaforos respectivos de pantallas
             Semaphore sPC, Semaphore sCC, Semaphore sEC, //Semaforos respectivos de cables
-            boolean val, Semaphore sI, int sleep, int prod, boolean run){ //Demás variables
+            boolean val, Semaphore sI, Semaphore sEF, int sleep, int prod, boolean run){ //Demás variables
+        
         this.sPB = sPB; this.sCB = sCB; this.sEB = sEB; this.sPP = sPP; this.sCP = sCP;
         this.sEP = sEP; this.sPC = sPC; this.sCC = sCC; this.sEC = sEC; this.val = val;
-        this.sI = sI; this.sleep = sleep; this.prod = prod; this.run = run;
+        this.sI = sI; this.sleep = sleep; this.prod = prod; this.sEF = sEF; this.run = run;
     }
     
     public void setRun(boolean run){
@@ -150,6 +153,7 @@ public class Productor extends Thread{
                     Main.apuntCC = (Main.apuntCC + 1) % Main.aBat.getTam();
                     Main.aCab.setDat(Main.apuntCC, this.val);
                     Main.apuntCC = (Main.apuntCC + 1) % Main.aBat.getTam();
+                    Main.enProd++;
                         //Sección de salida
                     sEB.release();
                     sEP.release();
@@ -164,14 +168,16 @@ public class Productor extends Thread{
                     Inicio.bat.setText("Baterías: "+Main.aBat.getLlenos());
                     Inicio.pan.setText("Pantallas: "+Main.aPan.getLlenos());//SC
                     Inicio.cab.setText("Cables: "+Main.aCab.getLlenos());
+                    Inicio.enProd.setText("Teléfonos en producción: "+Main.enProd);
                     sI.release();//SS
-                    
-                    System.out.println("Hora de empezar a producir un teléfono");
                     Thread.sleep(this.sleep);
-                    System.out.println("Teléfono producido");
+                    sEF.acquire();//SE
                     Main.tel++;//Nuevo teléfono producido
+                    sEF.release();//SS
                     sI.acquire();//SE
-                    Inicio.tel.setText("Teléfonos: "+Main.tel);
+                    Main.enProd--;
+                    Inicio.enProd.setText("Teléfonos en producción: "+Main.enProd);
+                    Inicio.tel.setText("Teléfonos: "+Main.tel);//Imprimir en la interfaz
                     sI.release();//SS
                     
                 } catch (InterruptedException ex) {

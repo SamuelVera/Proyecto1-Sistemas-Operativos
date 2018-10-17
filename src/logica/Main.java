@@ -22,6 +22,7 @@ public class Main {
     public static Almacen aPan;//Almacen de Pantallas
     public static Almacen aCab;//Almacen de Cables
     public static int tel;//Teléfonos producidos
+    public static int enProd = 0;
     
         //Semáforos
     private Semaphore semaProdB;//Semáforo de productores de Baterías
@@ -34,6 +35,7 @@ public class Main {
     private Semaphore semaConsC;//Semáforo de consumidor de Cables
     private Semaphore semaExC;//Semáforo de exclusividad del almacen de Cables
     private Semaphore semaImp;//Semáforo de exclusividad al imprimir
+    private Semaphore sEF;//Semáforo de exclusividad de unidades finales
     
         //Apuntadores
     public static int apuntPB;//Apuntar al almacen de Baterías para producir
@@ -80,7 +82,7 @@ public class Main {
             p = new Productor(this.semaProdB,this.semaConsB,this.semaExB,
             this.semaProdP,this.semaConsP,this.semaExP,
             this.semaProdC,this.semaConsC,this.semaExC,
-            false,this.semaImp,(this.data[0]*2),3,true);
+            false,this.semaImp,this.sEF,(this.data[0]*2),3,true);
         }
         p.start();
     }
@@ -182,6 +184,7 @@ public class Main {
         this.semaConsC = new Semaphore(-1);
         this.semaExC = new Semaphore(1);
         this.semaImp = new Semaphore(1);
+        this.sEF = new Semaphore(1);
         
             //Inicializar apuntadores
         Main.apuntPB = 0;
@@ -215,16 +218,20 @@ public class Main {
             Productor p = new Productor(this.semaProdB,this.semaConsB,this.semaExB,
             this.semaProdP,this.semaConsP,this.semaExP,
             this.semaProdC,this.semaConsC,this.semaExC,
-            false, this.semaImp, (this.data[0]*2), 3, true);
+            false,this.semaImp,this.sEF,(this.data[0]*2),3,true);
             p.start();
             this.lEn.addFirst(p);
         }
             //Contador de días
-        int[] contador = new int[]{this.data[12]};
-        Semaphore semaEL = new Semaphore(1);
+        int[] contador = new int[]{this.data[12]}; //Contador de días
+        Semaphore raceSema = new Semaphore(1); //Exclusividad para acceder al co
+        Semaphore semaSinc = new Semaphore(0); //Coherencia de datos del contador de teléfonos
+        Semaphore ceroSema2 = new Semaphore(0); 
             //Cronometrador
-        
+        Escritor e = new Escritor(raceSema, semaSinc, ceroSema2, contador, this.data[0], this.data[12]);
+        e.start();
             //Gerente
-        
+        Lector l = new Lector(raceSema, semaSinc, this.sEF, ceroSema2, contador, this.data[0]);
+        l.start();
     }
 }
