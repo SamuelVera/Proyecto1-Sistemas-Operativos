@@ -30,23 +30,29 @@ public class Escritor extends Thread{
                 Thread.sleep(this.sleep*15/16);
                 
                 raceSema.acquire(); //Sección de entrada al contador
-                Inicio.crono.setText("El cronometrador está revisando el contador");
+                Inicio.crono.setText("Está revisando el contador");
                 if(contador[0] == 0){
-                    Inicio.crono.setText("El cronometrador está esperando por el gerente a despachar");
+                    raceSema.release();
+                    Inicio.crono.setText("Está esperando por el gerente a despachar");
                     ceroSema.acquire(); //Esperar por el gerente para coherencia de datos
-                    Thread.sleep(this.sleep/16); //Esperar 1.5 horas para disminuir contador
+                    Thread.sleep(this.sleep/16); //Esperar 1.5 horas para reiniciar el contador
+                    raceSema.acquire();
                     contador[0] = this.diasD; //Reiniciar contador
+                    raceSema.release();
                     ceroSema2.release();
                 }else{
-                    Inicio.crono.setText("El cronometrador está disminuyendo el contador");
+                    raceSema.release();
+                    Inicio.crono.setText("Está disminuyendo el contador");
                     Thread.sleep(this.sleep/16); //Esperar 1.5 horas para disminuir contador
+                    raceSema.acquire();
                     contador[0]--;
+                    raceSema.release();
+                    raceSema.release();//Sección de salida
                 }
-                raceSema.release();//Sección de salida
                 
                     //Impresiones
                 Inicio.diasD.setText("Días para el despacho: "+contador[0]);
-                Inicio.crono.setText("El cronometrador está dormido");
+                Inicio.crono.setText("Está dormido");
                 
             } catch (InterruptedException ex) {
                 Logger.getLogger(Escritor.class.getName()).log(Level.SEVERE, null, ex);

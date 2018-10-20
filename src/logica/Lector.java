@@ -27,7 +27,7 @@ public class Lector extends Thread{
             try {
                 raceSema.acquire(); //Sección de entrada al contador
                 if(contador[0] != 0){ //Comprobar contador (SC)
-                    Inicio.geren.setText("El gerente está revisando el contador");
+                    Inicio.geren.setText("Revisando el contador");
                     raceSema.release(); //Sección de salida
                     Random rand = new Random();
                     long r = rand.nextLong(); //Elegir tiempo para dormir
@@ -36,14 +36,15 @@ public class Lector extends Thread{
                     }else if(r < (4/3)){ //Si va a dormir más de 18 horas filtra
                         r = 4/3;
                     }
-                    Inicio.geren.setText("El gerente está dormido");
+                    Inicio.geren.setText("Está dormido");
                     Thread.sleep(this.sleep/r); //Dormir el tiempo calculado
                 }else{
-                    Inicio.geren.setText("El gerente está despachando los teléfonos");
+                    Inicio.geren.setText("Despachando los teléfonos");
                     int desp;
                     sEF.acquire(); //SE
                     desp = Main.tel;
                     Main.tel = 0; //Despachar los teléfonos
+                    Inicio.tel.setText("Por despachar: "+Main.tel+" Teléfonos");
                     sEF.release(); //SS
                     ceroSema.release(); //Liberar contador de días al cronometrador
                     raceSema.release(); //Liberar semáforo para que ensambladores añadan teléfonos
