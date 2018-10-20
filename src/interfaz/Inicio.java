@@ -22,10 +22,10 @@ public class Inicio extends javax.swing.JFrame {
     private void initComponents() {
 
         close = new javax.swing.JButton();
-        prodBat = new javax.swing.JLabel();
-        prodPan = new javax.swing.JLabel();
-        prodCab = new javax.swing.JLabel();
-        ensNum = new javax.swing.JLabel();
+        prodBatED = new javax.swing.JLabel();
+        prodPanED = new javax.swing.JLabel();
+        prodCabED = new javax.swing.JLabel();
+        ensED = new javax.swing.JLabel();
         bat = new javax.swing.JLabel();
         pan = new javax.swing.JLabel();
         cab = new javax.swing.JLabel();
@@ -43,6 +43,22 @@ public class Inicio extends javax.swing.JFrame {
         tel = new javax.swing.JLabel();
         despacho = new javax.swing.JLabel();
         enProd = new javax.swing.JLabel();
+        text1 = new javax.swing.JLabel();
+        text2 = new javax.swing.JLabel();
+        text3 = new javax.swing.JLabel();
+        text4 = new javax.swing.JLabel();
+        prodBat1 = new javax.swing.JLabel();
+        prodPan1 = new javax.swing.JLabel();
+        prodCab1 = new javax.swing.JLabel();
+        ensNum1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        text5 = new javax.swing.JLabel();
+        text6 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        batImg = new javax.swing.JLabel();
+        panImg = new javax.swing.JLabel();
+        batImg2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -54,37 +70,47 @@ public class Inicio extends javax.swing.JFrame {
                 closeActionPerformed(evt);
             }
         });
-        getContentPane().add(close, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, -1, -1));
+        getContentPane().add(close, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 440, -1, 20));
 
-        prodBat.setText("Productores de baterías:");
-        getContentPane().add(prodBat, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 180, 20));
+        prodBatED.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
+        prodBatED.setText("Esperando para despedir:");
+        getContentPane().add(prodBatED, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 210, 20));
 
-        prodPan.setText("Productores de pantallas:");
-        getContentPane().add(prodPan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 180, 20));
+        prodPanED.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
+        prodPanED.setText("Esperando para despedir:");
+        getContentPane().add(prodPanED, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, 210, 20));
 
-        prodCab.setText("Productores de cables");
-        getContentPane().add(prodCab, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 180, 20));
+        prodCabED.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
+        prodCabED.setText("Esperando para despedir:");
+        getContentPane().add(prodCabED, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 210, 20));
 
-        ensNum.setText("Ensambladores");
-        getContentPane().add(ensNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 180, 20));
+        ensED.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        ensED.setText("Esperando para despedir:");
+        getContentPane().add(ensED, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 280, 220, 20));
 
-        bat.setText("Baterías: ");
-        getContentPane().add(bat, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 220, -1));
+        bat.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        bat.setText("0");
+        getContentPane().add(bat, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 30, -1));
 
-        pan.setText("Pantallas:");
-        getContentPane().add(pan, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 30, 220, -1));
+        pan.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        pan.setText("0");
+        getContentPane().add(pan, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 30, -1));
 
-        cab.setText("Cables:");
-        getContentPane().add(cab, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, 220, -1));
+        cab.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        cab.setText("0");
+        getContentPane().add(cab, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 30, -1));
 
-        geren.setText("El gerente está dormido");
-        getContentPane().add(geren, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 290, -1));
+        geren.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        geren.setText("Está dormido");
+        getContentPane().add(geren, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 380, 210, -1));
 
-        crono.setText("El cronometrador está dormido");
-        getContentPane().add(crono, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 290, -1));
+        crono.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        crono.setText("Está dormido");
+        getContentPane().add(crono, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 240, -1));
 
+        diasD.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         diasD.setText("Días para el despacho:");
-        getContentPane().add(diasD, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, 240, -1));
+        getContentPane().add(diasD, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 410, 180, 20));
 
         eliminarPBat.setText("-");
         eliminarPBat.addActionListener(new java.awt.event.ActionListener() {
@@ -92,7 +118,7 @@ public class Inicio extends javax.swing.JFrame {
                 eliminarPBatActionPerformed(evt);
             }
         });
-        getContentPane().add(eliminarPBat, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 40, -1));
+        getContentPane().add(eliminarPBat, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 40, 20));
 
         agregarPBat.setText("+");
         agregarPBat.addActionListener(new java.awt.event.ActionListener() {
@@ -100,7 +126,7 @@ public class Inicio extends javax.swing.JFrame {
                 agregarPBatActionPerformed(evt);
             }
         });
-        getContentPane().add(agregarPBat, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 40, -1));
+        getContentPane().add(agregarPBat, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 50, 40, 20));
 
         agregarPPan.setText("+");
         agregarPPan.addActionListener(new java.awt.event.ActionListener() {
@@ -108,7 +134,7 @@ public class Inicio extends javax.swing.JFrame {
                 agregarPPanActionPerformed(evt);
             }
         });
-        getContentPane().add(agregarPPan, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, 40, -1));
+        getContentPane().add(agregarPPan, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, 40, 20));
 
         eliminarPPan.setText("-");
         eliminarPPan.addActionListener(new java.awt.event.ActionListener() {
@@ -116,7 +142,7 @@ public class Inicio extends javax.swing.JFrame {
                 eliminarPPanActionPerformed(evt);
             }
         });
-        getContentPane().add(eliminarPPan, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 40, -1));
+        getContentPane().add(eliminarPPan, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, 40, 20));
 
         agregarPCab.setText("+");
         agregarPCab.addActionListener(new java.awt.event.ActionListener() {
@@ -124,7 +150,7 @@ public class Inicio extends javax.swing.JFrame {
                 agregarPCabActionPerformed(evt);
             }
         });
-        getContentPane().add(agregarPCab, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 40, -1));
+        getContentPane().add(agregarPCab, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 40, 20));
 
         eliminarPCab.setText("-");
         eliminarPCab.addActionListener(new java.awt.event.ActionListener() {
@@ -132,7 +158,7 @@ public class Inicio extends javax.swing.JFrame {
                 eliminarPCabActionPerformed(evt);
             }
         });
-        getContentPane().add(eliminarPCab, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 40, -1));
+        getContentPane().add(eliminarPCab, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 150, 40, 20));
 
         agregarEns.setText("+");
         agregarEns.addActionListener(new java.awt.event.ActionListener() {
@@ -140,7 +166,7 @@ public class Inicio extends javax.swing.JFrame {
                 agregarEnsActionPerformed(evt);
             }
         });
-        getContentPane().add(agregarEns, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 40, -1));
+        getContentPane().add(agregarEns, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 250, 40, 20));
 
         eliminarEns.setText("-");
         eliminarEns.addActionListener(new java.awt.event.ActionListener() {
@@ -148,16 +174,71 @@ public class Inicio extends javax.swing.JFrame {
                 eliminarEnsActionPerformed(evt);
             }
         });
-        getContentPane().add(eliminarEns, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 40, -1));
+        getContentPane().add(eliminarEns, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 250, 40, 20));
 
-        tel.setText("Teléfonos:");
-        getContentPane().add(tel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 220, -1));
+        tel.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        tel.setText("Por despachar:");
+        getContentPane().add(tel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 220, 20));
 
+        despacho.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         despacho.setText("Último despacho: ");
-        getContentPane().add(despacho, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 150, 240, -1));
+        getContentPane().add(despacho, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 240, -1));
 
-        enProd.setText("Teléfonos en producción:");
-        getContentPane().add(enProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 190, 20));
+        enProd.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        enProd.setText("En producción:");
+        getContentPane().add(enProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 190, 20));
+
+        text1.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        text1.setText("Gerente:");
+        getContentPane().add(text1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 340, -1, 20));
+
+        text2.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        text2.setText("Teléfonos:");
+        getContentPane().add(text2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, -1, 20));
+
+        text3.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        text3.setText("Productores:");
+        getContentPane().add(text3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, -1, -1));
+
+        text4.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        text4.setText("Almacenes: ");
+        getContentPane().add(text4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, -1, -1));
+
+        prodBat1.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
+        prodBat1.setText("De baterías:");
+        getContentPane().add(prodBat1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 140, 20));
+
+        prodPan1.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
+        prodPan1.setText("De pantallas:");
+        getContentPane().add(prodPan1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 140, 20));
+
+        prodCab1.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
+        prodCab1.setText("De cables:");
+        getContentPane().add(prodCab1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 140, 20));
+
+        ensNum1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        ensNum1.setText("Cantidad:");
+        getContentPane().add(ensNum1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, 180, 20));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 510, 20));
+
+        text5.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        text5.setText("Ensambladores:");
+        getContentPane().add(text5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, -1, 20));
+
+        text6.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        text6.setText("Cronometrador:");
+        getContentPane().add(text6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, -1, 20));
+        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 510, 20));
+
+        batImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cable.image.png"))); // NOI18N
+        getContentPane().add(batImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 80, 120));
+
+        panImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/pantalla.image.png"))); // NOI18N
+        getContentPane().add(panImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 80, 120));
+
+        batImg2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bateria.image.png"))); // NOI18N
+        getContentPane().add(batImg2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 80, 120));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 510, 470));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -177,7 +258,7 @@ public class Inicio extends javax.swing.JFrame {
         }else{
             m.newT(0);
             Main.pBat++;
-            Inicio.prodBat.setText("Productores de baterías: "+Main.pBat);
+            Inicio.prodBat1.setText("De baterías: "+Main.pBat);
         }
     }//GEN-LAST:event_agregarPBatActionPerformed
 
@@ -195,7 +276,7 @@ public class Inicio extends javax.swing.JFrame {
         }else{
             m.newT(1);
             Main.pPan++;
-            Inicio.prodPan.setText("Productores de pantallas: "+Main.pPan);
+            Inicio.prodPan1.setText("De pantallas: "+Main.pPan);
         }
     }//GEN-LAST:event_agregarPPanActionPerformed
 
@@ -213,7 +294,7 @@ public class Inicio extends javax.swing.JFrame {
         }else{
             m.newT(2);
             Main.pCab++;
-            Inicio.prodCab.setText("Productores de cables: "+Main.pCab);
+            Inicio.prodCab1.setText("De cables: "+Main.pCab);
         }
     }//GEN-LAST:event_agregarPCabActionPerformed
 
@@ -231,7 +312,7 @@ public class Inicio extends javax.swing.JFrame {
         }else{
             m.newT(3);
             Main.en++;
-            Inicio.ensNum.setText("Ensambladores: "+Main.en);
+            Inicio.ensNum1.setText("Contratados: "+Main.en);
         }
     }//GEN-LAST:event_agregarEnsActionPerformed
 
@@ -285,6 +366,8 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton agregarPCab;
     private javax.swing.JButton agregarPPan;
     public static javax.swing.JLabel bat;
+    private javax.swing.JLabel batImg;
+    private javax.swing.JLabel batImg2;
     public static javax.swing.JLabel cab;
     private javax.swing.JButton close;
     public static javax.swing.JLabel crono;
@@ -295,12 +378,26 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton eliminarPCab;
     private javax.swing.JButton eliminarPPan;
     public static javax.swing.JLabel enProd;
-    public static javax.swing.JLabel ensNum;
+    public static javax.swing.JLabel ensED;
+    public static javax.swing.JLabel ensNum1;
     public static javax.swing.JLabel geren;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     public static javax.swing.JLabel pan;
-    public static javax.swing.JLabel prodBat;
-    public static javax.swing.JLabel prodCab;
-    public static javax.swing.JLabel prodPan;
+    private javax.swing.JLabel panImg;
+    public static javax.swing.JLabel prodBat1;
+    public static javax.swing.JLabel prodBatED;
+    public static javax.swing.JLabel prodCab1;
+    public static javax.swing.JLabel prodCabED;
+    public static javax.swing.JLabel prodPan1;
+    public static javax.swing.JLabel prodPanED;
     public static javax.swing.JLabel tel;
+    private javax.swing.JLabel text1;
+    private javax.swing.JLabel text2;
+    private javax.swing.JLabel text3;
+    private javax.swing.JLabel text4;
+    private javax.swing.JLabel text5;
+    private javax.swing.JLabel text6;
     // End of variables declaration//GEN-END:variables
 }

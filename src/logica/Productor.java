@@ -34,15 +34,21 @@ public class Productor extends Thread{
         switch (i) {
             case 0:
                 Main.pBat--;
-                Inicio.prodBat.setText("Productores de baterías: "+Main.pBat);
+                Inicio.prodBat1.setText("De baterías: "+Main.pBat);
+                Main.pBatED--;
+                Inicio.prodBatED.setText("Esperando para despedir: "+Main.pBatED);
                 break;
             case 1:
                 Main.pPan--;
-                Inicio.prodPan.setText("Productores de pantallas: "+Main.pPan);
+                Inicio.prodPan1.setText("De pantallas: "+Main.pPan);
+                Main.pPanED--;
+                Inicio.prodPanED.setText("Esperando para despedir: "+Main.pPanED);
                 break;
             case 2:
                 Main.pCab--;
-                Inicio.prodCab.setText("Productores de cables: "+Main.pCab);
+                Inicio.prodCab1.setText("De cables: "+Main.pCab);
+                Main.pCabED--;
+                Inicio.prodCabED.setText("Esperando para despedir: "+Main.pCabED);
                 break;
             default:
                 break;
@@ -78,7 +84,7 @@ public class Productor extends Thread{
                     try {
                             //Imprimir por pantalla
                         sI.acquire();//SE
-                        Inicio.bat.setText("Baterías: "+Main.aBat.getLlenos());//SC
+                        Inicio.bat.setText(""+Main.aBat.getLlenos());//SC
                         sI.release();//SS
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Productor.class.getName()).log(Level.SEVERE, null, ex);
@@ -96,7 +102,7 @@ public class Productor extends Thread{
                     try {
                             //Imprimir por pantalla
                         sI.acquire();//SE
-                        Inicio.pan.setText("Pantallas: "+Main.aPan.getLlenos());//SC
+                        Inicio.pan.setText(""+Main.aPan.getLlenos());//SC
                         sI.release();//SS
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Productor.class.getName()).log(Level.SEVERE, null, ex);
@@ -114,7 +120,7 @@ public class Productor extends Thread{
                 try {
                         //Imprimir por pantalla
                     sI.acquire();//SE
-                    Inicio.cab.setText("Cables: "+Main.aCab.getLlenos());//SC
+                    Inicio.cab.setText(""+Main.aCab.getLlenos());//SC
                     sI.release();//SS
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Productor.class.getName()).log(Level.SEVERE, null, ex);

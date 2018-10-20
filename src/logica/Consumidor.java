@@ -38,7 +38,9 @@ public class Consumidor extends Thread{
     
     private void efectuarDespido(){
         Main.en--;
-        Inicio.ensNum.setText("Productores de cables: "+Main.en);
+        Inicio.ensNum1.setText("Contratados: "+Main.en);
+        Main.enED--;
+        Inicio.ensED.setText("Esperando para despedir: "+Main.enED);
     }
     
     @Override
@@ -75,10 +77,10 @@ public class Consumidor extends Thread{
                 Main.enProd++;
                     //Imprimir
                 sI.acquire();//SE
-                Inicio.bat.setText("Baterías: "+Main.aBat.getLlenos());
-                Inicio.pan.setText("Pantallas: "+Main.aPan.getLlenos());//SC
-                Inicio.cab.setText("Cables: "+Main.aCab.getLlenos());
-                Inicio.enProd.setText("Teléfonos en producción: "+Main.enProd);
+                Inicio.bat.setText(""+Main.aBat.getLlenos());
+                Inicio.pan.setText(""+Main.aPan.getLlenos());//SC
+                Inicio.cab.setText(""+Main.aCab.getLlenos());
+                Inicio.enProd.setText("En producción: "+Main.enProd);
                 sI.release();//SS
                 Thread.sleep(this.sleep);
                 sEF.acquire();//SE
@@ -86,8 +88,8 @@ public class Consumidor extends Thread{
                 sEF.release();//SS
                 sI.acquire();//SE
                 Main.enProd--;
-                Inicio.enProd.setText("Teléfonos en producción: "+Main.enProd);
-                Inicio.tel.setText("Teléfonos: "+Main.tel);//Imprimir en la interfaz
+                Inicio.enProd.setText("En producción: "+Main.enProd+" Teléfonos");
+                Inicio.tel.setText("Por despachar: "+Main.tel+" Teléfonos");//Imprimir en la interfaz
                 sI.release();//SS
                 
             } catch (InterruptedException ex) {

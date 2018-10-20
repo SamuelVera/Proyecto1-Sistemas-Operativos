@@ -16,13 +16,17 @@ public class Main {
     public static int pCab;//Cantidad de productores de cables
     public static int en;//Cantidad de ensambladores
     
+    public static int pBatED;//Productores de baterías esperando por liquidación
+    public static int pPanED;//Productores de pantallas esperando por liquidación
+    public static int pCabED;//Productores de cables esperando por liquidación
+    public static int enED;//Ensambladores esperando por liquidación
     
         //Almacenes
     public static Almacen aBat;//Almacen de Baterias
     public static Almacen aPan;//Almacen de Pantallas
     public static Almacen aCab;//Almacen de Cables
     public static int tel;//Teléfonos producidos
-    public static int enProd = 0;
+    public static int enProd = 0;//Teléfonos en producción
     
         //Semáforos
     private Semaphore semaProdB;//Semáforo de productores de Baterías
@@ -56,15 +60,23 @@ public class Main {
         if(tipo == 0 && this.lBat.peekLast() != null){
             Productor p = (Productor)this.lBat.removeLast();
             p.setRun(false);
+            Main.pBatED++;
+            Inicio.prodBatED.setText("Esperando para despedir: "+Main.pBatED);
         }else if(tipo == 1 && this.lPan.peekLast() != null){
             Productor p = (Productor)this.lPan.removeLast();
             p.setRun(false);
+            Main.pPanED++;
+            Inicio.prodPanED.setText("Esperando para despedir: "+Main.pPanED);
         }else if(tipo == 2 && this.lCab.peekLast() != null){
             Productor p = (Productor)this.lCab.removeLast();
             p.setRun(false);
+            Main.pCabED++;
+            Inicio.prodCabED.setText("Esperando para despedir: "+Main.pCabED);
         }else if(tipo == 3 && this.lEn.peekLast()!= null){
             Consumidor p = (Consumidor)this.lEn.removeLast();
             p.setRun(false);
+            Main.enED++;
+            Inicio.ensED.setText("Esperando para despedir: "+Main.enED);
         }
     }
     
@@ -186,15 +198,15 @@ public class Main {
             }
         }
         
-        Inicio.prodBat.setText("Productores de baterías: "+this.data[1]);
+        Inicio.prodBat1.setText("De baterías: "+this.data[1]);
         Main.pBat = this.data[1];
-        Inicio.prodPan.setText("Productores de pantallas: "+this.data[2]);
+        Inicio.prodPan1.setText("De pantallas: "+this.data[2]);
         Main.pPan = this.data[2];
-        Inicio.prodCab.setText("Productores de cables: "+data[3]);
+        Inicio.prodCab1.setText("De cables: "+data[3]);
         Main.pCab = this.data[3];
-        Inicio.ensNum.setText("Ensambladores: "+this.data[10]);
+        Inicio.ensNum1.setText("Contratados: "+this.data[10]);
         Main.en = this.data[10];
-        Inicio.diasD.setText("Días entre despachos: "+this.data[12]);
+        Inicio.diasD.setText("Días para el despacho: "+this.data[12]);
         
             //Crear almacenes
         Main.aBat = new Almacen(data[7]);
