@@ -78,10 +78,10 @@ public class Inicio extends javax.swing.JFrame {
         getContentPane().add(cab, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, 220, -1));
 
         geren.setText("El gerente está dormido");
-        getContentPane().add(geren, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 240, -1));
+        getContentPane().add(geren, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 290, -1));
 
         crono.setText("El cronometrador está dormido");
-        getContentPane().add(crono, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 240, -1));
+        getContentPane().add(crono, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 290, -1));
 
         diasD.setText("Días para el despacho:");
         getContentPane().add(diasD, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, 240, -1));
@@ -172,82 +172,74 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_closeActionPerformed
 
     private void agregarPBatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPBatActionPerformed
-        if(m.pBat+1 > m.data[4]){
+        if(Main.pBat+1 > m.data[4]){
             System.out.println("Máximo de productores de bateria alcanzado"); //Cambiar por un JOptionPane
         }else{
             m.newT(0);
-            m.pBat++;
-            Inicio.prodBat.setText("Productores de baterías: "+m.pBat);
+            Main.pBat++;
+            Inicio.prodBat.setText("Productores de baterías: "+Main.pBat);
         }
     }//GEN-LAST:event_agregarPBatActionPerformed
 
     private void eliminarPBatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarPBatActionPerformed
-        if(m.pBat-1 < 0){
+        if(Main.pBat-1 < 0){
             System.out.println("Error: Productores negativos"); //Cambiar por un JOptionPane
         }else{
-            m.pBat--;
-            Inicio.prodBat.setText("Productores de baterías: "+m.pBat);
             m.closeT(0);
         }
     }//GEN-LAST:event_eliminarPBatActionPerformed
 
     private void agregarPPanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPPanActionPerformed
-        if(m.pPan+1 > m.data[5]){
+        if(Main.pPan+1 > m.data[5]){
             System.out.println("Máximo de productores de pantallas alcanzado"); //Cambiar por un JOptionPane
         }else{
             m.newT(1);
-            m.pPan++;
-            Inicio.prodPan.setText("Productores de pantallas: "+m.pPan);
+            Main.pPan++;
+            Inicio.prodPan.setText("Productores de pantallas: "+Main.pPan);
         }
     }//GEN-LAST:event_agregarPPanActionPerformed
 
     private void eliminarPPanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarPPanActionPerformed
-        if(m.pPan-1 < 0){
+        if(Main.pPan-1 < 0){
             System.out.println("Error: Productores negativos"); //Cambiar por un JOptionPane
         }else{
-            m.pPan--;
-            Inicio.prodPan.setText("Productores de pantallas: "+m.pPan);
             m.closeT(1);
         }
     }//GEN-LAST:event_eliminarPPanActionPerformed
 
     private void agregarPCabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPCabActionPerformed
-        if(m.pCab+1 > m.data[6]){
+        if(Main.pCab+1 > m.data[6]){
             System.out.println("Máximo de productores de cables alcanzado"); //Cambiar por un JOptionPane
         }else{
             m.newT(2);
-            m.pCab++;
-            Inicio.prodCab.setText("Productores de cables: "+m.pCab);
+            Main.pCab++;
+            Inicio.prodCab.setText("Productores de cables: "+Main.pCab);
         }
     }//GEN-LAST:event_agregarPCabActionPerformed
 
     private void eliminarPCabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarPCabActionPerformed
-        if(m.pCab-1 < 0){
+        if(Main.pCab-1 < 0){
             System.out.println("Error: Productores negativos"); //Cambiar por un JOptionPane
         }else{
-            m.pCab--;
-            Inicio.prodCab.setText("Productores de cables: "+m.pCab);
             m.closeT(2);
         }
     }//GEN-LAST:event_eliminarPCabActionPerformed
 
     private void agregarEnsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarEnsActionPerformed
-        if(m.en+1 > m.data[11]){
+        if(Main.en+1 > m.data[11]){
             System.out.println("Máximo de ensambladores alcanzado"); //Cambiar por un JOptionPane
         }else{
             m.newT(3);
-            m.en++;
-            Inicio.ensNum.setText("Ensambladores: "+m.en);
+            Main.en++;
+            Inicio.ensNum.setText("Ensambladores: "+Main.en);
         }
     }//GEN-LAST:event_agregarEnsActionPerformed
 
     private void eliminarEnsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarEnsActionPerformed
-        if(m.en-1 < 0){
+        if(Main.en-1 < 0){
             System.out.println("Error: número negativo de ensambladores"); //Cambiar por un JOptionPane
         }else{
             m.closeT(3);
-            m.en--;
-            Inicio.ensNum.setText("Ensambladores: "+m.en);
         }
     }//GEN-LAST:event_eliminarEnsActionPerformed
 
