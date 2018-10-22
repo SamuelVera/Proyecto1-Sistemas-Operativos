@@ -221,7 +221,7 @@ public class Main {
         this.semaConsP = new Semaphore(0);
         this.semaExP = new Semaphore(1);
         this.semaProdC = new Semaphore(this.data[9]);
-        this.semaConsC = new Semaphore(-1);
+        this.semaConsC = new Semaphore(0);
         this.semaExC = new Semaphore(1);
         this.semaImp = new Semaphore(1);
         this.sEF = new Semaphore(1);

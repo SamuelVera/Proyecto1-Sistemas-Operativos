@@ -55,9 +55,9 @@ public class Inicio extends javax.swing.JFrame {
         text5 = new javax.swing.JLabel();
         text6 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        batImg = new javax.swing.JLabel();
+        cabImg = new javax.swing.JLabel();
         panImg = new javax.swing.JLabel();
-        batImg2 = new javax.swing.JLabel();
+        batImg = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -230,14 +230,14 @@ public class Inicio extends javax.swing.JFrame {
         getContentPane().add(text6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, -1, 20));
         getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 510, 20));
 
-        batImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cable.image.png"))); // NOI18N
-        getContentPane().add(batImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 80, 120));
+        cabImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cable.image.png"))); // NOI18N
+        getContentPane().add(cabImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 80, 120));
 
         panImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/pantalla.image.png"))); // NOI18N
         getContentPane().add(panImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 80, 120));
 
-        batImg2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bateria.image.png"))); // NOI18N
-        getContentPane().add(batImg2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 80, 120));
+        batImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bateria.image - copia.png"))); // NOI18N
+        getContentPane().add(batImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 80, 120));
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 510, 470));
 
         pack();
@@ -367,8 +367,8 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton agregarPPan;
     public static javax.swing.JLabel bat;
     private javax.swing.JLabel batImg;
-    private javax.swing.JLabel batImg2;
     public static javax.swing.JLabel cab;
+    private javax.swing.JLabel cabImg;
     private javax.swing.JButton close;
     public static javax.swing.JLabel crono;
     public static javax.swing.JLabel despacho;

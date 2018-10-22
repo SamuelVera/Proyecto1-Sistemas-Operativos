@@ -50,8 +50,7 @@ public class Consumidor extends Thread{
                     //Verificar almacenes vacíos
                 sCB.acquire();
                 sCP.acquire();
-                sCC.acquire();
-                sCC.acquire();
+                sCC.acquire(2);
                     //Sección de entrada
                 sEB.acquire();
                 sEP.acquire();
@@ -72,15 +71,14 @@ public class Consumidor extends Thread{
                     //Avisar nuevo espacio vacio
                 sPB.release();
                 sPP.release();
-                sPC.release();
-                sPC.release();
+                sPC.release(2);
                 Main.enProd++;
                     //Imprimir
                 sI.acquire();//SE
                 Inicio.bat.setText(""+Main.aBat.getLlenos());
                 Inicio.pan.setText(""+Main.aPan.getLlenos());//SC
                 Inicio.cab.setText(""+Main.aCab.getLlenos());
-                Inicio.enProd.setText("En producción: "+Main.enProd);
+                Inicio.enProd.setText("En producción: "+Main.enProd+" Teléfonos");
                 sI.release();//SS
                 Thread.sleep(this.sleep);
                 sEF.acquire();//SE

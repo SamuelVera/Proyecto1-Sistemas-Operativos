@@ -507,7 +507,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="batImg">
+    <Component class="javax.swing.JLabel" name="cabImg">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/imagenes/cable.image.png"/>
@@ -531,15 +531,15 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="batImg2">
+    <Component class="javax.swing.JLabel" name="batImg">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/imagenes/bateria.image.png"/>
+          <Image iconType="3" name="/imagenes/bateria.image - copia.png"/>
         </Property>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="10" y="40" width="80" height="120"/>
+          <AbsoluteConstraints x="0" y="40" width="80" height="120"/>
         </Constraint>
       </Constraints>
     </Component>
